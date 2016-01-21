@@ -34,16 +34,15 @@
       }
       function drawPos(canvas, x, y) {
         var context = canvas.getContext('2d');
+        //draw rectangles
         context.clearRect(0, 0, canvas.width, 160);
         context.beginPath();
         context.rect(2, 2, 156, 156);
         context.rect(41, 41, 77, 77);
-        //context.fillStyle = 'yellow';
-        //context.fill();
         context.lineWidth = 4;
         context.strokeStyle = 'black';
         context.stroke();
-        
+        // draw diagonals
         context.beginPath();
         context.moveTo(0,0);
         context.lineTo(160,160);
@@ -51,7 +50,7 @@
         context.lineTo(0,160);
         context.lineWidth = 2;
         context.stroke();
-
+        //draw center
         var radius = 10;
         context.beginPath();
         context.arc(x - 10, y - 10, radius, 0, 2 * Math.PI, false);
@@ -106,6 +105,5 @@
         setInterval(updateCam, 1000);
       };
     </script>
-    
   </body>
 </html>

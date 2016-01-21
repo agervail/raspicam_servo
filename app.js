@@ -3,11 +3,9 @@ import subprocess
 import time
 app = Flask(__name__)
 
-
-
 @app.route("/")
 def index():
-    return "Hello You"
+  return "Hello You"
 
 @app.route("/move_servo")
 def move_servo():
@@ -28,6 +26,6 @@ def cam():
   return render_template('cam.html', img_src='static/current.jpg?' + str(int(time.time())))
 
 if __name__ == "__main__":
-    #app.debug = True
-    #app.run(host='0.0.0.0')
-    app.run()
+  #app.debug = True
+  #app.run(host='0.0.0.0')
+  app.run()
