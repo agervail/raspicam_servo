@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+      #myCanvas {
+        cursor: crosshair;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <p><img src=" {{img_src}} " id="cam_img" style="width:352px; height:288px;"></p>
+    <canvas id="myCanvas" width="160" height="190"></canvas>
+    <form action="move_servo" id="my_form">
+      x :
+      <input type="text" name="x" id="x_text">
+      <br>
+      y :
+      <input type="text" name="y" id="y_text">
+      <br>
+      <input type="submit">
+    </form>
+    <script>
+      function writeMessage(canvas, message) {
+        var context = canvas.getContext('2d');
+        context.clearRect(0, 160, canvas.width, 30);
+        context.font = '18pt Calibri';
+        context.fillStyle = 'black';
+        context.fillText(message, 0, 180);
+      }
+      function drawPos(canvas, x, y) {
+        var context = canvas.getContext('2d');
+        context.clearRect(0, 0, canvas.width, 160);
+        context.beginPath();
+        context.rect(2, 2, 156, 156);
+        context.rect(41, 41, 77, 77);
+        //context.fillStyle = 'yellow';
+        //context.fill();
+        context.lineWidth = 4;
+        context.strokeStyle = 'black';
+        context.stroke();
+        
+        context.beginPath();
+        context.moveTo(0,0);
+        context.lineTo(160,160);
+        context.moveTo(160,0);
+        context.lineTo(0,160);
+        context.lineWidth = 2;
+        context.stroke();
+
+        var radius = 10;
+        context.beginPath();
+        context.arc(x - 10, y - 10, radius, 0, 2 * Math.PI, false);
+        context.fillStyle = 'green';
+        context.fill();
+        context.lineWidth = 5;
+        context.strokeStyle = '#003300';
+        context.stroke();
+      }
+      function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top
+        };
+      }
+      
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      
+      canvas.addEventListener('click', function(evt) {
+        var mousePos = getMousePos(canvas, evt);
+        x = mousePos.x + 10;
+        y = mousePos.y + 10;
+        if (x >= 10 && x <= 170 && y >= 10 && y <= 170){
+          var message = 'x : ' + x + ' | y : ' + y;
+          writeMessage(canvas, message);
+          document.getElementById("x_text").value = x;
+          document.getElementById("y_text").value = y;
+          $('#my_form').submit();
+        }
+      }, false);
+      canvas.addEventListener('mousemove', function(evt) {
+        var mousePos = getMousePos(canvas, evt);
+        x = mousePos.x + 10;
+        y = mousePos.y + 10;
+        if (x >= 10 && x <= 170 && y >= 10 && y <= 170){
+          var message = 'x : ' + x + ' | y : ' + y;
+          writeMessage(canvas, message);
+        }
+      }, false);
+
+      window.onload = function() {
+        var updateCam = function() {
+        document.getElementById('cam_img').src = 'static/current.jpg?' + new Date().getTime();
+        $.getJSON('static/pos.json?' + new Date().getTime(), function(json) {
+          drawPos(canvas,json.x, json.y);
+          console.log(json); // this will show the info in firebug console
+        });
+        };
+        updateCam();
+        setInterval(updateCam, 1000);
+      };
+    </script>
+    
+  </body>
+</html>
