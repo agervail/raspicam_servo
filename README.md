@@ -13,4 +13,12 @@ Controlled via a web interface.
 
 
 ## Requirements
-A raspberry with raspian on it. An arduino connected to the two servos and the raspberry.
+### Raspberry
+* Raspian
+* Python (flask, smbus, json)
+
+### Arduino
+* Code reading orders from the Rasberry and controlling servos [Here on codebender] (https://codebender.cc/sketch:145093)
+
+### 3D Printing
+* [Thingiverse project](http://www.thingiverse.com/thing:504196) (I made some minor adjustement, reinforcement of certain parts)
