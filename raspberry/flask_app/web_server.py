@@ -13,7 +13,7 @@ def move_servo():
     try:
       x = 180 - int(request.args['x'])
       y = 180 - int(request.args['y'])
-      subprocess.Popen(["python", "write_pan_tilt.py", "-p", str(x), "-t", str(y)])
+      subprocess.Popen(["python", "script/write_pan_tilt.py", "-p", str(x), "-t", str(y)])
     except:
       pass
   return redirect(url_for('cam'))
@@ -21,11 +21,10 @@ def move_servo():
 @app.route("/cam")
 def cam():
   url_for('static', filename='current.jpg')
-  url_for('static', filename='target.png')
   url_for('static', filename='pos.json')
   return render_template('cam.html', img_src='static/current.jpg?' + str(int(time.time())))
 
 if __name__ == "__main__":
-  #app.debug = True
-  #app.run(host='0.0.0.0')
-  app.run()
+  app.debug = True
+  app.run(host='0.0.0.0')
+  #app.run()

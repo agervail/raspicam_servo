@@ -37,8 +37,13 @@
         //draw rectangles
         context.clearRect(0, 0, canvas.width, 160);
         context.beginPath();
+        context.fillStyle="#FF0000";
+        context.fillRect(2, 2, 156, 156);
         context.rect(2, 2, 156, 156);
-        context.rect(41, 41, 77, 77);
+        //context.rect(41, 41, 77, 77);
+        context.fillStyle="#FFFFFF";
+        context.fillRect(18, 18, 124, 124);
+        context.rect(18, 18, 124, 124);
         context.lineWidth = 4;
         context.strokeStyle = 'black';
         context.stroke();
@@ -75,7 +80,7 @@
         var mousePos = getMousePos(canvas, evt);
         x = mousePos.x + 10;
         y = mousePos.y + 10;
-        if (x >= 10 && x <= 170 && y >= 10 && y <= 170){
+        if (x >= 30 && x <= 150 && y >= 30 && y <= 150){
           var message = 'x : ' + x + ' | y : ' + y;
           writeMessage(canvas, message);
           document.getElementById("x_text").value = x;
@@ -87,7 +92,7 @@
         var mousePos = getMousePos(canvas, evt);
         x = mousePos.x + 10;
         y = mousePos.y + 10;
-        if (x >= 10 && x <= 170 && y >= 10 && y <= 170){
+        if (x >= 30 && x <= 150 && y >= 30 && y <= 150){
           var message = 'x : ' + x + ' | y : ' + y;
           writeMessage(canvas, message);
         }
