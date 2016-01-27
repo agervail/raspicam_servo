@@ -13,7 +13,7 @@
   </head>
   <body>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <p><img src=" {{img_src}} " id="cam_img" style="width:352px; height:288px;"></p>
+    <p><img src=" {{img_src}} " id="cam_img" style="width:320px; height:240px;"></p>
     <canvas id="myCanvas" width="160" height="190"></canvas>
     <form action="move_servo" id="my_form">
       x :
@@ -107,7 +107,7 @@
         });
         };
         updateCam();
-        setInterval(updateCam, 1000);
+        setInterval(updateCam, 3000);
       };
     </script>
   </body>

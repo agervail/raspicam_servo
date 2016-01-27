@@ -24,7 +24,11 @@ def cam():
   url_for('static', filename='pos.json')
   return render_template('cam.html', img_src='static/current.jpg?' + str(int(time.time())))
 
+@app.route("/laser_map")
+def laser_map():
+  return render_template('visu_laser.html')
+
 if __name__ == "__main__":
-  app.debug = True
+  #app.debug = True
   app.run(host='0.0.0.0')
   #app.run()
