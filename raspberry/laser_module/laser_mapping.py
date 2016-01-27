@@ -32,25 +32,20 @@ def writeServoPos(pan=None, tilt=None):
 def detectLaser(imgName):
   print 'open'
   im = Image.open(imgName)
-  #im = Image.open('imageOH.jpg')
-  # CROP ?
   box = (986,672,1606,972)
   region = im.crop(box)
   print 'loading'
   pix = region.load()
-  #pix = im.load()
   width, height = (2592,1944)
   boxWidth, boxHeight = (620,300)
 
   xSum = 0
-  # ySum = 0
   totalNum = 0
   print 'loop'
   for x in range(boxWidth):
     for y in range(boxHeight):
       if pix[x,y][0] >= 220:
         xSum += x
-        # ySum += y
         totalNum += 1.
   if totalNum == 0:
     return 0
@@ -84,13 +79,9 @@ def main(argv):
   camera.ISO = 800
   camera.shutter_speed = 100000
   camera.resolution = (2592,1944)
-  #camera.zoom = (0.35,0.35,0.3,0.25)
   lowerBound = 30
   upperBound = 160
-  #lowerBound = 90
-  #upperBound = 130
   step = 20
-  #laserMap = {'x':[], 'y':[], 'z':[]}
   laserMap = []
   for y in range(lowerBound, upperBound, step):
     writeServoPos(tilt=y)
@@ -105,21 +96,7 @@ def main(argv):
       point = convertDistToXY(x-90, y-90, dist)
       laserMap.append(point)
       print dist
-      #laserMap['x'].append(point[0])
-      #laserMap['y'].append(point[1])
-      #laserMap['z'].append(point[2])
 
-  print 'x : ['
-  for p in laserMap:
-    print p[0], ',',
-  print '],\ny : ['
-  for p in laserMap:
-    print p[1], ',',
-  print '],\nz : ['
-  for p in laserMap:
-    print p[2], ',',
-  print '],'
-  #print dist
   import json
   with open('out.json','w') as f:
     f.write(json.dumps(laserMap))
