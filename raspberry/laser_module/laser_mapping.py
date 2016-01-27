@@ -79,15 +79,17 @@ def main(argv):
   camera.ISO = 800
   camera.shutter_speed = 100000
   camera.resolution = (2592,1944)
-  lowerBound = 30
-  upperBound = 160
-  step = 20
+  lowerBound = 40
+  upperBound = 145
+  step = 5
   laserMap = []
   for y in range(lowerBound, upperBound, step):
     writeServoPos(tilt=y)
     for x in range(lowerBound, upperBound, step):
       writeServoPos(pan=x)
+      time.sleep(1)
       imgName = 'pos_x' + str(x) + '_y' + str(y) + '.jpg'
+      print 'capture'
       camera.capture(imgName)
       print 'compute distance'
       dist = findDistance(imgName)

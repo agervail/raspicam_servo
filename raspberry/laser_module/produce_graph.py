@@ -1,18 +1,21 @@
 import json
 k = json.load(open('out.json'))
 print '<html>		<head><!-- Plotly.js -->		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>		</head>		<body>		<!-- Plotly chart will be drawn inside this DIV -->		<div id="myDiv" style="width:100%;height:100%"></div>		<script>'
-for i in range(0,len(k),7):
-  print 'var trace' + str(i/7) + '= {'
+
+nb_l = 21
+print len(k)
+for i in range(0,len(k),nb_l):
+  print 'var trace' + str(i/nb_l) + '= {'
   print 'x : ['
-  for j in range(7):
+  for j in range(nb_l):
     print k[i + j][0], ',',
   print '],'
   print 'y : ['
-  for j in range(7):
+  for j in range(nb_l):
     print k[i + j][1], ',',
   print '],'
   print 'z : ['
-  for j in range(7):
+  for j in range(nb_l):
     print k[i + j][2], ',',
   print '],'
 
@@ -34,8 +37,8 @@ for i in range(0,len(k),7):
   print "};"
 
 print "var data = [",
-for i in range(0,len(k),7):
-  print "trace" + str(i/7) + ', ',
+for i in range(0,len(k),nb_l):
+  print "trace" + str(i/nb_l) + ', ',
 print "];",
 print "var layout = {"
 print "  autosize: false,"
