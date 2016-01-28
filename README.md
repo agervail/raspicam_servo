@@ -10,10 +10,10 @@ python web_server.py
 ```
 
 ## Pictures
-
+![general view](general_view.jpg)
 
 ## Wiring
-
+![wiring](wiring_bb.jpg)
 
 ## Requirements
 ### Raspberry
